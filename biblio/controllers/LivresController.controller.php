@@ -38,6 +38,11 @@ class LivresController {
         header('Location: '. URL . "livres");
     }
 
+    public function modificationLivre($id) {
+        $livre = $this->livreManager->getLivreById($id);
+        require "views/modifierLivre.view.php";
+    }
+
     private function ajoutImage($file, $dir) {
         if(!isset($file['name']) || empty($file['name']))
             throw new Exception("Vous devez indiquer une image");
