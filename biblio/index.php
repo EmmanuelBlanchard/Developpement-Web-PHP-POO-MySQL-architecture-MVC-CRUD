@@ -1,9 +1,11 @@
-<?php ob_start(); ?>
-
-<p>ici le contenu de ma page d'accueil</p>
-
 <?php
-    $titre = "Bibliothèque MGA";
-    $content = ob_get_clean();
-    require "template.php";
-?>
+
+if(empty($_GET['page'])) {
+    require "views/accueil.views.php";
+} else {
+    switch($_GET['page']) {
+        case "accueil" : require "views/accueil.views.php";
+        break;
+    }
+}
+
