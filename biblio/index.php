@@ -18,7 +18,7 @@ try {
                 if(empty($url[1])) {
                     $livreController->afficherLivres();
                 } else if($url[1] === "l") {
-                    echo "affichage d'un livre";
+                    $livreController->afficherLivre($url[2]);
                 } else if($url[1] === "a") {
                     echo "ajouter d'un livre";
                 } else if($url[1] === "m") {
