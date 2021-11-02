@@ -6,11 +6,14 @@ class Livre {
     private $nombrePages;
     private $image;
 
+    public static $livres; //tableau de livres
+
     public function __construct($id,$titre,$nombrePages,$image) {
         $this->id = $id;
         $this->titre = $titre;
         $this->nombrePages = $nombrePages;
         $this->image = $image;
+        self::$livres[] = $this;
     }
 
     public function getId() {return $this->id;}
