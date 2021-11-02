@@ -40,5 +40,6 @@ try {
     }
 }
 catch(Exception $e) {
-    echo $e->getMessage();
+    $message = $e->getMessage();
+    require "views/error.view.php";
 }

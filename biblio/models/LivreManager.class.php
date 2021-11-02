@@ -30,8 +30,8 @@ class LivreManager extends Model {
             if($this->livres[$i]->getId() === $id) {
                 return $this->livres[$i];
             }
-            
         }
+        throw new Exception("Le livre n'existe pas");
     }
 
     public function ajoutLivreBd($titre,$nombrePages,$image) {
