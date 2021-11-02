@@ -65,4 +65,24 @@ class LivreManager extends Model {
         }
     }
 
+    public function modificationLivreBD($id,$titre,$nombrePages,$image) {
+        $req = "
+        UPDATE livres 
+        SET titre = :titre, nombrePages = :nombrePages, image = :image
+        WHERE id = :id";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":id",$id,PDO::PARAM_INT);
+        $stmt->bindValue(":titre",$titre,PDO::PARAM_STR);
+        $stmt->bindValue(":nombrePages",$nombrePages,PDO::PARAM_INT);
+        $stmt->bindValue(":image",$image,PDO::PARAM_STR);
+        $resultat = $stmt->execute();
+        $stmt->closeCursor();
+
+        if($resultat > 0){
+            $this->getLivreById($id)->setTitre($titre);
+            $this->getLivreById($id)->setNombrePages($nombrePages);
+            $this->getLivreById($id)->setImage($image);
+        }
+    }
+
 }
