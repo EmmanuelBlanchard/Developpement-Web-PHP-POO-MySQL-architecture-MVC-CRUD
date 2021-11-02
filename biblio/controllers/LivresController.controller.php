@@ -31,6 +31,13 @@ class LivresController {
         header('Location: '. URL . "livres");
     }
 
+    public function suppressionLivre($id) {
+        $nomImage = $this->livreManager->getLivreById($id)->getImage();
+        unlink("public/images/".$nomImage); // suppression de l'image
+        $this->livreManager->suppressionLivreBD($id); // suppression en BD
+        header('Location: '. URL . "livres");
+    }
+
     private function ajoutImage($file, $dir) {
         if(!isset($file['name']) || empty($file['name']))
             throw new Exception("Vous devez indiquer une image");
