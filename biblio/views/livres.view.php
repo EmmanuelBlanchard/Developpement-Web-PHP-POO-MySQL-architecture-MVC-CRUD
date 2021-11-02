@@ -21,7 +21,7 @@ ob_start();
     </tr>
     <?php endfor; ?>
 </table>
-<a href="" class="btn btn-success d-block">Ajouter</a>
+<a href="<?= URL ?>livres/a" class="btn btn-success d-block">Ajouter</a>
 
 <?php
 $content = ob_get_clean();

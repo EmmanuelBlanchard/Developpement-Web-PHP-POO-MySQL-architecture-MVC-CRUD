@@ -20,11 +20,13 @@ try {
                 } else if($url[1] === "l") {
                     $livreController->afficherLivre($url[2]);
                 } else if($url[1] === "a") {
-                    echo "ajouter d'un livre";
+                    $livreController->ajoutLivre();
                 } else if($url[1] === "m") {
                     echo "modifier un livre";
                 } else if($url[1] === "s") {
                     echo "suppression d'un livre";
+                } else if($url[1] === "av") {
+                    echo "validation d'ajout d'un livre";
                 } else {
                     throw new Exception("La page n'existe pas");
                 }
