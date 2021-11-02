@@ -12,6 +12,7 @@ class LivresController {
     public function afficherLivres() {
         $livres = $this->livreManager->getLivres();
         require "views/livres.view.php";
+        unset($_SESSION['alert']);
     }
 
     public function afficherLivre($id) {
@@ -28,6 +29,12 @@ class LivresController {
         $repertoire = "public/images/";
         $nomImageAjoute = $this->ajoutImage($file,$repertoire); // upload de l'image
         $this->livreManager->ajoutLivreBd($_POST['titre'],$_POST['nombrePages'],$nomImageAjoute); // ajout en BD et MAJ de la liste des livres
+
+        $_SESSION['alert'] = [
+            "type" => "success",
+            "message" => "L'ajout du livre " . $_POST['titre'] . " a été réalisé"
+        ];
+
         header('Location: '. URL . "livres");
     }
 
@@ -35,6 +42,12 @@ class LivresController {
         $nomImage = $this->livreManager->getLivreById($id)->getImage();
         unlink("public/images/".$nomImage); // suppression de l'image
         $this->livreManager->suppressionLivreBD($id); // suppression en BD
+
+        $_SESSION['alert'] = [
+            "type" => "success",
+            "message" => "Le livre a été supprimé"
+        ];
+
         header('Location: '. URL . "livres");
     }
 
@@ -55,6 +68,12 @@ class LivresController {
             $nomImageToAdd = $imageActuelle;
         }
         $this->livreManager->modificationLivreBD($_POST['identifiant'],$_POST['titre'],$_POST['nombrePages'],$nomImageToAdd);
+        
+        $_SESSION['alert'] = [
+            "type" => "success",
+            "message" => "La modification du livre " . $_POST['titre'] . " a été réalisée"
+        ];
+
         header('Location: '. URL . "livres");
     }
 
