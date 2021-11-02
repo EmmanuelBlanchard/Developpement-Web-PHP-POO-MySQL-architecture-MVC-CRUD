@@ -34,4 +34,21 @@ class LivreManager extends Model {
         }
     }
 
+    public function ajoutLivreBd($titre,$nombrePages,$image) {
+        $req = "
+        INSERT INTO livres (titre, nombrePages, image)
+        values (:titre, :nombrePages, :image)";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":titre",$titre,PDO::PARAM_STR);
+        $stmt->bindValue(":nombrePages",$nombrePages,PDO::PARAM_INT);
+        $stmt->bindValue(":image",$image,PDO::PARAM_STR);
+        $resultat = $stmt->execute();
+        $stmt->closeCursor();
+
+        if($resultat > 0) {
+            $livre = new Livre($this->getBdd()->lastInsertId(),$titre,$nombrePages,$image); // création d'un livre
+            $this->ajoutLivre($livre); // ajout du livre dans le tableau de livres
+        }  
+    }
+
 }
